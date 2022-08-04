@@ -1,0 +1,57 @@
+#!/bin/bash
+
+echo "Start user data"
+
+cd /home/ec2-user/
+
+yum -y install pip
+
+pip install Flask
+
+pip install sqlAlchemy
+
+pip install psycopg2-binary
+
+pip install boto3
+
+pip install jsonify
+
+yum -y install git
+
+yum -y install postgresql.x86_64
+
+git clone https://github.com/wozniakrafal88/test_app.git
+
+mkdir -p /home/ec2-user/.aws/ && cat > /home/ec2-user/.aws/config << ENDOFFILE
+[default]
+region = eu-west-1
+ENDOFFILE
+
+cat > /etc/systemd/system/flaskapp.service << ENDOFFILE
+[Unit]
+Description=Run Flask app
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Environment=RDSHOST=rwozniak2-db.cn10audml9ef.eu-west-1.rds.amazonaws.com
+Environment=DB_DBNAME=flask_db
+Environment=DB_PORT=5432
+Environment=DB_USERNAME=dbtest
+Environment=AWS_REGION=eu-west-1
+Type=simple
+Restart=always
+RestartSec=1
+User=ec2-user
+WorkingDirectory=/home/ec2-user/test_app/
+ExecStart= /bin/flask run --host=0.0.0.0
+
+[Install]
+WantedBy=multi-user.target
+ENDOFFILE
+
+
+systemctl daemon-reload
+
+systemctl start flaskapp.service
+
+systemctl enable flaskapp.service
