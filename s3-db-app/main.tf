@@ -1,10 +1,7 @@
-module "vpc" {
-  source = "./modules/vpc"
-}
-
 module "rds" {
   source = "./modules/rds"
 
+  tag_owner          = var.tag_owner
   private_subnet1_id = module.vpc.private_subnet1_id
   private_subnet2_id = module.vpc.private_subnet2_id
   vpc_id             = module.vpc.vpc_id
@@ -14,6 +11,7 @@ module "rds" {
 module "iam" {
   source = "./modules/iam"
 
+  tag_owner          = var.tag_owner
   resource_id = module.rds.resource_id
   arn         = module.rds.arn
 }
@@ -21,6 +19,7 @@ module "iam" {
 module "ec2" {
   source = "./modules/ec2"
 
+  tag_owner          = var.tag_owner
   s3_iam_profile     = module.iam.s3_iam_profile
   rds_iam_profile    = module.iam.rds_iam_profile
   sc_lb_id           = module.vpc.sc_lb_id
