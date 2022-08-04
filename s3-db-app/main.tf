@@ -1,3 +1,9 @@
+module "vpc" {
+  source = "./modules/vpc"
+
+  tag_owner          = var.tag_owner
+}
+
 module "rds" {
   source = "./modules/rds"
 
