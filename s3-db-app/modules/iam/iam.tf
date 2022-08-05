@@ -1,5 +1,5 @@
 resource "aws_iam_role" "iam_role_rds" {
-  name = "rwozniak2_iam_rds"
+  name = "${var.tag_name_prefix}_iam_rds"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -18,12 +18,12 @@ resource "aws_iam_role" "iam_role_rds" {
 
   tags = {
     Owner = var.tag_owner
-    Name  = "rwozniak2_iam_rds"
+    Name  = "${var.tag_name_prefix}_iam_rds"
   }
 }
 
 resource "aws_iam_role" "iam_role_s3" {
-  name = "rwozniak2_iam_s3"
+  name = "${var.tag_name_prefix}_iam_s3"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -41,7 +41,7 @@ resource "aws_iam_role" "iam_role_s3" {
 })
   tags = {
     Owner = var.tag_owner
-    Name  = "rwozniak2_iam_s3"
+    Name  = "${var.tag_name_prefix}_iam_s3"
   }
 }
 
@@ -97,13 +97,13 @@ data "aws_iam_policy_document" "rds_role_policy_doc" {
 }
 
 resource "aws_iam_policy" "rds_role_policy" {
-  name   = "rwozniak2_rds_role_policy"
+  name   = "${var.tag_name_prefix}_rds_role_policy"
   path   = "/"
   policy = data.aws_iam_policy_document.rds_role_policy_doc.json
 }
 
 resource "aws_iam_policy" "s3_role_policy" {
-  name   = "rwozniak2_s3_role_policy"
+  name   = "${var.tag_name_prefix}_s3_role_policy"
   path   = "/"
   policy = data.aws_iam_policy_document.s3_role_policy_doc.json
 }

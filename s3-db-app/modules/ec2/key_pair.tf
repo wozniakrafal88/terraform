@@ -4,7 +4,7 @@ resource "tls_private_key" "private_key" {
 }
 
 resource "aws_key_pair" "key_pair" {
-  key_name   = "rwozniak2" # Create a "myKey" to AWS!!
+  key_name   = "${var.tag_name_prefix}-key-pair" # Create a "myKey" to AWS!!
   public_key = tls_private_key.private_key.public_key_openssh
 }
 

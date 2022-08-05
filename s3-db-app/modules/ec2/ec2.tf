@@ -4,9 +4,9 @@ resource "aws_instance" "ec2_bastion" {
   associate_public_ip_address = var.ec2_associate_public_ip_address
   key_name                    = aws_key_pair.key_pair.key_name
   security_groups             = ["${var.sc_ssh_id}"]
-  subnet_id                   = var.public_subnet1_id
+  subnet_id                   = var.public_subnet_ids[1]
   tags = {
-    Name  = "rwozniak2-bastion"
+    Name  = "${var.tag_name_prefix}-bastion"
     Owner = var.tag_owner
   }
 }

@@ -1,9 +1,9 @@
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.eip.id
-  subnet_id     = aws_subnet.public_subnet1.id
+  subnet_id     = aws_subnet.public_subnet[1].id
 
   tags = {
-    Name  = "rwozniak2-nat"
+    Name  = "${var.tag_name_prefix}-nat"
     Owner = var.tag_owner
   }
 

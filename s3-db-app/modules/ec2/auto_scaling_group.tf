@@ -1,6 +1,6 @@
 resource "aws_autoscaling_group" "db_app_asg" {
-  name = "rwozniak2_db_app_asg"
-  vpc_zone_identifier = ["${var.private_subnet1_id}"]
+  name = "${var.tag_name_prefix}_db_app_asg"
+  vpc_zone_identifier = ["${var.private_subnet_ids[0]}"]
   desired_capacity   = 1
   max_size           = 3
   min_size           = 1
@@ -13,8 +13,8 @@ resource "aws_autoscaling_group" "db_app_asg" {
 
 
 resource "aws_autoscaling_group" "s3_app_asg" {
-  name = "rwozniak2_s3_app_asg"
-  vpc_zone_identifier = ["${var.private_subnet1_id}"]
+  name = "${var.tag_name_prefix}_s3_app_asg"
+  vpc_zone_identifier = ["${var.private_subnet_ids[0]}"]
   desired_capacity   = 1
   max_size           = 3
   min_size           = 1

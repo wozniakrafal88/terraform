@@ -1,9 +1,9 @@
-resource "aws_vpc" "rwozniak2-vpc" {
-  cidr_block       = "10.0.0.0/16"
+resource "aws_vpc" "vpc" {
+  cidr_block       = var.vpc_cidr_block
   instance_tenancy = "default"
 
   tags = {
-    Name  = "rwozniak2-vpc"
+    Name  = "${var.tag_name_prefix}-vpc"
     Owner = var.tag_owner
   }
 }

@@ -1,8 +1,8 @@
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.rwozniak2-vpc.id
+  vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name  = "rwozniak2-igw"
+    Name  = "${var.tag_name_prefix}-igw"
     Owner = var.tag_owner
   }
 }

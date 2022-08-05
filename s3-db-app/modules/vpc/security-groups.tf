@@ -1,12 +1,12 @@
 resource "aws_security_group" "sc_ssh" {
-  name   = "rwozniak2-Security-Group-SSH"
-  vpc_id = aws_vpc.rwozniak2-vpc.id
+  name   = "${var.tag_name_prefix}-Security-Group-SSH"
+  vpc_id = aws_vpc.vpc.id
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["188.114.87.23/32"]
+    cidr_blocks = ["${var.cidr_blocks_for_bastion}"]
 
   }
 
@@ -18,14 +18,14 @@ resource "aws_security_group" "sc_ssh" {
   }
 
   tags = {
-    Name  = "rwozniak2-Security-Group-SSH"
-    Owner = "rwozniak"
+    Name  = "${var.tag_name_prefix}-Security-Group-SSH"
+    Owner = var.tag_owner
   }
 }
 
 resource "aws_security_group" "sc_apps" {
-  name   = "rwozniak2-Security-Group-Apps"
-  vpc_id = aws_vpc.rwozniak2-vpc.id
+  name   = "${var.tag_name_prefix}-Security-Group-Apps"
+  vpc_id = aws_vpc.vpc.id
 
   ingress {
     from_port   = 5000
@@ -51,14 +51,14 @@ resource "aws_security_group" "sc_apps" {
   }
 
   tags = {
-    Name  = "rwozniak2-Security-Group-Apps"
-    Owner = "rwozniak"
+    Name  = "${var.tag_name_prefix}-Security-Group-Apps"
+    Owner = var.tag_owner
   }
 }
 
 resource "aws_security_group" "sc_db" {
-  name   = "rwozniak2-Security-Group-DB"
-  vpc_id = aws_vpc.rwozniak2-vpc.id
+  name   = "${var.tag_name_prefix}-Security-Group-DB"
+  vpc_id = aws_vpc.vpc.id
 
   ingress {
     from_port   = 5432
@@ -76,14 +76,14 @@ resource "aws_security_group" "sc_db" {
   }
 
   tags = {
-    Name  = "rwozniak2-Security-Group-DB"
-    Owner = "rwozniak"
+    Name  = "${var.tag_name_prefix}-Security-Group-DB"
+    Owner = var.tag_owner
   }
 }
 
 resource "aws_security_group" "sc_lb" {
-  name   = "rwozniak2-Security-Group-LB"
-  vpc_id = aws_vpc.rwozniak2-vpc.id
+  name   = "${var.tag_name_prefix}-Security-Group-LB"
+  vpc_id = aws_vpc.vpc.id
 
   ingress {
     from_port   = 80
@@ -101,7 +101,7 @@ resource "aws_security_group" "sc_lb" {
   }
 
   tags = {
-    Name  = "rwozniak2-Security-Group-LB"
-    Owner = "rwozniak"
+    Name  = "${var.tag_name_prefix}-Security-Group-LB"
+    Owner = var.tag_owner
   }
 }

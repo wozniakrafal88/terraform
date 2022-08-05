@@ -9,3 +9,7 @@ variable "arn" {
 variable "tag_owner"{
   type = string
 }
+
+variable "tag_name_prefix"{
+  type = string
+}

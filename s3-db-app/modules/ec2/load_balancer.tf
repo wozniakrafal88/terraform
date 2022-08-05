@@ -1,12 +1,12 @@
 resource "aws_lb" "load_balancer" {
-  name               = "rwozniak2-alb"
+  name               = "${var.tag_name_prefix}-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [var.sc_lb_id]
-  subnets            = [var.public_subnet1_id, var.public_subnet2_id]
+  subnets            = var.public_subnet_ids
 
   tags = {
-    Name  = "rwozniak2_alb"
+    Name  = "${var.tag_name_prefix}_alb"
     Owner = var.tag_owner
   }
 }

@@ -1,5 +1,5 @@
 resource "aws_lb_target_group" "tg_db" {
-  name        = "rwozniak2-tg-db"
+  name        = "${var.tag_name_prefix}-tg-db"
   target_type = "instance"
   port        = 5000
   protocol    = "HTTP"
@@ -13,7 +13,7 @@ resource "aws_lb_target_group" "tg_db" {
 }*/
 
 resource "aws_lb_target_group" "tg_s3" {
-  name        = "rwozniak2-tg-s3"
+  name        = "${var.tag_name_prefix}-tg-s3"
   target_type = "instance"
   port        = 5000
   protocol    = "HTTP"

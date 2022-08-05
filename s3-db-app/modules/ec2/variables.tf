@@ -7,8 +7,8 @@ variable "sc_lb_id" {
 }
 
 
-variable "public_subnet2_id" {
-  type = string
+variable "public_subnet_ids" {
+  type = list
 }
 
 variable "sc_ssh_id" {
@@ -19,12 +19,8 @@ variable "sc_apps_id" {
   type = string
 }
 
-variable "public_subnet1_id" {
-  type = string
-}
-
-variable "private_subnet1_id" {
-  type = string
+variable "private_subnet_ids" {
+  type = list
 }
 
 variable "rds_iam_profile" {
@@ -52,4 +48,59 @@ variable "ec2_associate_public_ip_address" {
 
 variable "tag_owner"{
   type = string
+}
+
+variable "tag_name_prefix"{
+  type = string
+}
+
+variable "rds_host" {
+  type = string
+}
+
+variable "db_name" {
+  type = string
+}
+
+variable "db_port" {
+  type = string
+}
+
+variable "db_username" {
+  type = string
+}
+
+variable "bucket_name" {
+  type = string
+  default = "rwozniak-s3"
+}
+
+variable "db_yum_programs" {
+  type = list
+  default = ["pip", "git", "postgresql.x86_64"]
+}
+
+variable "db_pip_programs" {
+  type = list
+  default = ["Flask", "sqlAlchemy", "psycopg2-binary", "boto3", "jsonify"]
+}
+
+variable "db_git_url" {
+  type = string
+  default = "https://github.com/wozniakrafal88/test_app.git"
+}
+
+variable "s3_yum_programs" {
+  type = list
+  default = ["pip", "git"]
+}
+
+variable "s3_pip_programs" {
+  type = list
+  default = ["Flask", "requests", "boto3"]
+}
+
+variable "s3_git_url" {
+  type = string
+  default = "https://github.com/wozniakrafal88/s3_app.git"
 }
