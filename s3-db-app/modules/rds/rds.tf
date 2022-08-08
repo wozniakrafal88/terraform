@@ -3,7 +3,7 @@ resource "aws_db_instance" "rds" {
   engine                              = var.engine
   engine_version                      = var.engine_version
   instance_class                      = var.instance_class
-  identifier                          = var.identifier
+  identifier                          = lower(local.identifier)
   username                            = var.username
   password                            = var.password
   skip_final_snapshot                 = var.skip_final_snapshot
@@ -11,17 +11,17 @@ resource "aws_db_instance" "rds" {
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   vpc_security_group_ids              = ["${var.sc_db_id}"]
   tags = {
-    Name  = "${var.tag_name_prefix}-db"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_db"
     Owner = var.tag_owner
   }
 }
 
 resource "aws_db_subnet_group" "db_subnet" {
-  name       = "${var.tag_name_prefix}_db_subnet"
+  name       = "${var.env_name}_${var.tag_name_prefix}_db_subnet"
   subnet_ids = var.private_subnet_ids
 
   tags = {
-    Name  = "${var.tag_name_prefix}_db_subnet"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_db_subnet"
     Owner = var.tag_owner
   }
 

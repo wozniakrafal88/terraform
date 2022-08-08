@@ -25,11 +25,6 @@ variable "instance_class"{
   default = "db.t3.micro"
 }
 
-variable "identifier"{
-  type = string
-  default = "rwozniak2-db"
-}
-
 variable "username"{
   type = string
   default = "postgres"
@@ -55,5 +50,9 @@ variable "tag_owner"{
 }
 
 variable "tag_name_prefix"{
+  type = string
+}
+
+variable "env_name"{
   type = string
 }

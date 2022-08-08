@@ -54,6 +54,10 @@ variable "tag_name_prefix"{
   type = string
 }
 
+variable "env_name"{
+  type = string
+}
+
 variable "rds_host" {
   type = string
 }
@@ -103,4 +107,14 @@ variable "s3_pip_programs" {
 variable "s3_git_url" {
   type = string
   default = "https://github.com/wozniakrafal88/s3_app.git"
+}
+
+variable "db_app_name" {
+  type = string
+  default = "test_app"
+}
+
+variable "s3_app_name" {
+  type = string
+  default = "s3_app"
 }

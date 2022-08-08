@@ -1,5 +1,5 @@
 resource "aws_security_group" "sc_ssh" {
-  name   = "${var.tag_name_prefix}-Security-Group-SSH"
+  name   = "${var.tag_name_prefix}_Security_Group_SSH"
   vpc_id = aws_vpc.vpc.id
 
   ingress {
@@ -18,13 +18,13 @@ resource "aws_security_group" "sc_ssh" {
   }
 
   tags = {
-    Name  = "${var.tag_name_prefix}-Security-Group-SSH"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_Security_Group_SSH"
     Owner = var.tag_owner
   }
 }
 
 resource "aws_security_group" "sc_apps" {
-  name   = "${var.tag_name_prefix}-Security-Group-Apps"
+  name   = "${var.tag_name_prefix}_Security_Group_Apps"
   vpc_id = aws_vpc.vpc.id
 
   ingress {
@@ -51,13 +51,13 @@ resource "aws_security_group" "sc_apps" {
   }
 
   tags = {
-    Name  = "${var.tag_name_prefix}-Security-Group-Apps"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_Security_Group_Apps"
     Owner = var.tag_owner
   }
 }
 
 resource "aws_security_group" "sc_db" {
-  name   = "${var.tag_name_prefix}-Security-Group-DB"
+  name   = "${var.tag_name_prefix}_Security_Group_DB"
   vpc_id = aws_vpc.vpc.id
 
   ingress {
@@ -76,13 +76,13 @@ resource "aws_security_group" "sc_db" {
   }
 
   tags = {
-    Name  = "${var.tag_name_prefix}-Security-Group-DB"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_Security_Group_DB"
     Owner = var.tag_owner
   }
 }
 
 resource "aws_security_group" "sc_lb" {
-  name   = "${var.tag_name_prefix}-Security-Group-LB"
+  name   = "${var.tag_name_prefix}_Security_Group_LB"
   vpc_id = aws_vpc.vpc.id
 
   ingress {
@@ -101,7 +101,7 @@ resource "aws_security_group" "sc_lb" {
   }
 
   tags = {
-    Name  = "${var.tag_name_prefix}-Security-Group-LB"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_Security_Group_LB"
     Owner = var.tag_owner
   }
 }

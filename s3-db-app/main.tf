@@ -3,6 +3,7 @@ module "vpc" {
 
   tag_owner          = var.tag_owner
   tag_name_prefix    = var.tag_name_prefix
+  env_name           = local.env_name
 }
 
 module "rds" {
@@ -10,6 +11,7 @@ module "rds" {
 
   tag_owner          = var.tag_owner
   tag_name_prefix    = var.tag_name_prefix
+  env_name           = local.env_name
   private_subnet_ids = module.vpc.private_subnet_ids
   vpc_id             = module.vpc.vpc_id
   sc_db_id           = module.vpc.sc_db_id
@@ -20,6 +22,7 @@ module "iam" {
 
   tag_owner          = var.tag_owner
   tag_name_prefix    = var.tag_name_prefix
+  env_name           = local.env_name
   resource_id = module.rds.resource_id
   arn         = module.rds.arn
 }
@@ -29,6 +32,7 @@ module "ec2" {
 
   tag_owner          = var.tag_owner
   tag_name_prefix    = var.tag_name_prefix
+  env_name           = local.env_name
   s3_iam_profile     = module.iam.s3_iam_profile
   rds_iam_profile    = module.iam.rds_iam_profile
   rds_host           = module.rds.rds_host

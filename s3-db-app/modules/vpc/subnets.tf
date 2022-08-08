@@ -5,7 +5,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone = var.public_subnets[count.index].availability_zone
 
   tags = {
-    Name  = "${var.tag_name_prefix}-pub-subnet${count.index}"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_pub_subnet${count.index}"
     Owner = var.tag_owner
   }
 }
@@ -17,7 +17,7 @@ resource "aws_subnet" "private_subnet" {
   availability_zone = var.private_subnets[count.index].availability_zone
 
   tags = {
-    Name  = "${var.tag_name_prefix}-priv-subnet${count.index}"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_priv_subnet${count.index}"
     Owner = var.tag_owner
   }
 }
@@ -30,7 +30,7 @@ resource "aws_subnet" "private_subnet" {
   availability_zone = "eu-west-1a"
 
   tags = {
-    Name  = "${var.tag_name_prefix}-pub-subnet1"
+    Name  = "${var.env_name}_${var.tag_name_prefix}-pub-subnet1"
     Owner = var.tag_owner
   }
 }
@@ -41,7 +41,7 @@ resource "aws_subnet" "public_subnet2" {
   availability_zone = "eu-west-1b"
 
   tags = {
-    Name  = "${var.tag_name_prefix}-pub-subnet2"
+    Name  = "${var.env_name}_${var.tag_name_prefix}-pub-subnet2"
     Owner = var.tag_owner
   }
 }
@@ -52,7 +52,7 @@ resource "aws_subnet" "private_subnet1" {
   availability_zone = "eu-west-1a"
 
   tags = {
-    Name  = "${var.tag_name_prefix}-priv-subnet1"
+    Name  = "${var.env_name}_${var.tag_name_prefix}-priv-subnet1"
     Owner = var.tag_owner
   }
 }
@@ -63,7 +63,7 @@ resource "aws_subnet" "private_subnet2" {
   availability_zone = "eu-west-1b"
 
   tags = {
-    Name  = "${var.tag_name_prefix}-priv-subnet2"
+    Name  = "${var.env_name}_${var.tag_name_prefix}-priv-subnet2"
     Owner = var.tag_owner
   }
 }*/

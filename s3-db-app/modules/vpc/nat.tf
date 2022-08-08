@@ -3,7 +3,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = aws_subnet.public_subnet[1].id
 
   tags = {
-    Name  = "${var.tag_name_prefix}-nat"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_nat"
     Owner = var.tag_owner
   }
 

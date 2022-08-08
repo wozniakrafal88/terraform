@@ -6,7 +6,7 @@ resource "aws_instance" "ec2_bastion" {
   security_groups             = ["${var.sc_ssh_id}"]
   subnet_id                   = var.public_subnet_ids[1]
   tags = {
-    Name  = "${var.tag_name_prefix}-bastion"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_bastion"
     Owner = var.tag_owner
   }
 }

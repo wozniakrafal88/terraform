@@ -7,7 +7,7 @@ resource "aws_route_table" "rt_pub" {
   }
 
   tags = {
-    Name  = "${var.tag_name_prefix}-pub-RT"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_pub_RT"
     Owner = var.tag_owner
   }
 }
@@ -21,7 +21,7 @@ resource "aws_route_table" "rt_priv" {
   }
 
   tags = {
-    Name  = "${var.tag_name_prefix}-pub-RT"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_pub_RT"
     Owner = var.tag_owner
   }
 }

@@ -1,5 +1,5 @@
 resource "aws_iam_role" "iam_role_rds" {
-  name = "${var.tag_name_prefix}_iam_rds"
+  name = "${var.env_name}_${var.tag_name_prefix}_iam_rds"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -18,12 +18,12 @@ resource "aws_iam_role" "iam_role_rds" {
 
   tags = {
     Owner = var.tag_owner
-    Name  = "${var.tag_name_prefix}_iam_rds"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_iam_rds"
   }
 }
 
 resource "aws_iam_role" "iam_role_s3" {
-  name = "${var.tag_name_prefix}_iam_s3"
+  name = "${var.env_name}_${var.tag_name_prefix}_iam_s3"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -41,81 +41,41 @@ resource "aws_iam_role" "iam_role_s3" {
 })
   tags = {
     Owner = var.tag_owner
-    Name  = "${var.tag_name_prefix}_iam_s3"
+    Name  = "${var.env_name}_${var.tag_name_prefix}_iam_s3"
   }
 }
 
 
 resource "aws_iam_instance_profile" "s3_profile" {
-  name = "s3_profile"
+  name = "${var.env_name}_${var.tag_name_prefix}_s3_profile"
   role = aws_iam_role.iam_role_s3.name
 }
 
 resource "aws_iam_instance_profile" "rds_profile" {
-  name = "rds_profile"
+  name = "${var.env_name}_${var.tag_name_prefix}_rds_profile"
   role = aws_iam_role.iam_role_rds.name
 }
 
-
-data "aws_iam_policy_document" "s3_role_policy_doc" {
-  statement {
-    sid = "s3policy1"
-    effect = "Allow"
-    actions = [
-      "s3:*",
-    ]
-
-    resources = [
-     "arn:aws:s3:::rwozniak-s3/*",
-    ]
-  }
-  statement {
-    sid = "s3policy2"
-    effect = "Allow"
-    actions = [
-      "s3:*",
-    ]
-
-    resources = [
-     "arn:aws:s3:::rwozniak-s3",
-    ]
-  }
-}
-
-data "aws_iam_policy_document" "rds_role_policy_doc" {
-  statement {
-    sid = "rdspolicy"
-    effect = "Allow"
-    actions = [
-      "rds-db:connect",
-    ]
-
-    resources = [
-     "arn:aws:rds-db:eu-west-1:890769921003:dbuser:${var.resource_id}/*",
-    ]
-  }
-}
-
 resource "aws_iam_policy" "rds_role_policy" {
-  name   = "${var.tag_name_prefix}_rds_role_policy"
+  name   = "${var.env_name}_${var.tag_name_prefix}_rds_role_policy"
   path   = "/"
   policy = data.aws_iam_policy_document.rds_role_policy_doc.json
 }
 
 resource "aws_iam_policy" "s3_role_policy" {
-  name   = "${var.tag_name_prefix}_s3_role_policy"
+  name   = "${var.env_name}_${var.tag_name_prefix}_s3_role_policy"
   path   = "/"
   policy = data.aws_iam_policy_document.s3_role_policy_doc.json
 }
 
 resource "aws_iam_policy_attachment" "s3-attach" {
-  name       = "s3-attachment"
+  name       = "s3_attachment"
   roles      = [aws_iam_role.iam_role_s3.name]
   policy_arn = aws_iam_policy.s3_role_policy.arn
 }
 
 resource "aws_iam_policy_attachment" "rds-attach" {
-  name       = "rds-attachment"
+  name       = "rds_attachment"
   roles      = [aws_iam_role.iam_role_rds.name]
   policy_arn = aws_iam_policy.rds_role_policy.arn
 }

@@ -13,3 +13,7 @@ variable "tag_owner"{
 variable "tag_name_prefix"{
   type = string
 }
+
+variable "env_name"{
+  type = string
+}
