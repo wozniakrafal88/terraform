@@ -19,7 +19,7 @@ resource "aws_instance" "ec2_bastion" {
 
 resource "aws_instance" "ec2_jenkins" {
   ami             = var.ec2_ami
-  instance_type   = var.ec2_instance_type
+  instance_type   = "t2.small"
   key_name        = aws_key_pair.key_pair.key_name
   vpc_security_group_ids  = ["${var.sc_jenkins_id}"]
   subnet_id       = var.private_subnet_ids[0]
