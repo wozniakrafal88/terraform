@@ -77,6 +77,8 @@ cat > jenkins.model.JenkinsLocationConfiguration.xml <<ENDOFFILE
 </jenkins.model.JenkinsLocationConfiguration>
 ENDOFFILE
 
+sed -i "s+http://admin:119eb78cddab52d0e2a48282fb223276a6@jenkins_load_Balancer_url/reload+http://admin:119eb78cddab52d0e2a48282fb223276a6@${jenkins_load_Balancer_url}/reload+g" /home/ec2-user/jenkins_home/jobs/Update_Current_Release/config.xml
+
 docker run -p 8080:8080 -p 50000:50000 -d --restart=always -v /home/ec2-user/jenkins_home/:/var/jenkins_home --name jenkins  jenkins/jenkins
 
 sleep 60
@@ -103,8 +105,6 @@ curl -X POST 'http://admin:119eb78cddab52d0e2a48282fb223276a6@${jenkins_load_Bal
     "stapler-class": "com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey"
   }
 }'
-
-sed -i "s+http://admin:119eb78cddab52d0e2a48282fb223276a6@jenkins_load_Balancer_url/reload+http://admin:119eb78cddab52d0e2a48282fb223276a6@${jenkins_load_Balancer_url}/reload+g" /home/ec2-user/jenkins_home/jobs/Update_Current_Release/config.xml
 
 mkdir -p /home/ec2-user/.aws/ && cat > /home/ec2-user/.aws/config << ENDOFFILE
 [default]
